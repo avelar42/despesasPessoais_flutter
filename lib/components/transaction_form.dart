@@ -41,47 +41,53 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: titleController,
-              decoration: InputDecoration(labelText: 'Titulo'),
-            ),
-            TextField(
-              controller: valueController,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (value) => _SubmitForm(),
-              decoration: InputDecoration(labelText: 'Valor (R\$)'),
-            ),
-            Container(
-              height: 70,
-              child: Row(
-                children: [
-                  Text(_selectedDate == null
-                      ? 'Nenhuma Data selecionada!'
-                      : DateFormat('d/M/y').format(_selectedDate)),
-                  TextButton(
-                    onPressed: _showDatePicker,
-                    child: Text("Selecione a Data",
-                        style: TextStyle(color: Colors.purple)),
-                  )
-                ],
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: Padding(
+          padding: EdgeInsets.only(
+              top: 10.0,
+              right: 10.0,
+              left: 10.0,
+              bottom: 10 + MediaQuery.of(context).viewInsets.bottom),
+          child: Column(
+            children: [
+              TextField(
+                controller: titleController,
+                decoration: InputDecoration(labelText: 'Titulo'),
               ),
-            ),
-            Row(
-              children: [
-                ElevatedButton(
-                  onPressed: _SubmitForm,
-                  child: Text('Nova Transacao',
-                      style: TextStyle(color: Colors.white)),
+              TextField(
+                controller: valueController,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                onSubmitted: (value) => _SubmitForm(),
+                decoration: InputDecoration(labelText: 'Valor (R\\\$)'),
+              ),
+              Container(
+                height: 70,
+                child: Row(
+                  children: [
+                    Text(_selectedDate == null
+                        ? 'Nenhuma Data selecionada!'
+                        : DateFormat('d/M/y').format(_selectedDate)),
+                    TextButton(
+                      onPressed: _showDatePicker,
+                      child: Text("Selecione a Data",
+                          style: TextStyle(color: Colors.purple)),
+                    )
+                  ],
                 ),
-              ],
-            )
-          ],
+              ),
+              Row(
+                children: [
+                  ElevatedButton(
+                    onPressed: _SubmitForm,
+                    child: Text('Nova Transacao',
+                        style: TextStyle(color: Colors.white)),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
